@@ -50,12 +50,11 @@ const buildCompletePath = (pathIn) => {
 
 const findIntersections = (firstCablePath, secondCablePath) => {
     const intersections = []
+    const secondPathSet = new Set(secondCablePath.map(point => `${point.x},${point.y}`))
 
     for (let firstPoint of firstCablePath) {
-        for (let secondPoint of secondCablePath) {
-            if (!(firstPoint.x === 0 && firstPoint.y === 0) && firstPoint.x === secondPoint.x && firstPoint.y === secondPoint.y) {
-                intersections.push({x: firstPoint.x, y: firstPoint.y})
-            }
+        if(!(firstPoint.x === 0 && firstPoint.y === 0) && secondPathSet.has(`${firstPoint.x},${firstPoint.y}`)) {
+            intersections.push({x: firstPoint.x, y: firstPoint.y})
         }
     }
     
